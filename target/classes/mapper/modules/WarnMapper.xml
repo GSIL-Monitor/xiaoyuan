@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.warn.mapper.WarnMapper">
+    
+    <resultMap type="Warn" id="WarnResult">
+        <result property="id"    column="id"    />
+        <result property="matter"    column="matter"    />
+        <result property="beginTime"    column="begin_time"    />
+        <result property="endTime"    column="end_time"    />
+        <result property="warnTime"    column="warn_time"    />
+        <result property="remark"    column="remark"    />
+    </resultMap>
+	
+	<sql id="selectWarnVo">
+        select id, matter, begin_time, end_time, warn_time, remark from matter_warn
+    </sql>
+	
+    <select id="selectWarnList" parameterType="Warn" resultMap="WarnResult">
+        <include refid="selectWarnVo"/>
+        <where>  
+            <if test="id != null "> and id = #{id}</if>
+             <if test="matter != null  and matter != '' "> and matter = #{matter}</if>
+             <if test="beginTime != null "> and begin_time = #{beginTime}</if>
+             <if test="endTime != null "> and end_time = #{endTime}</if>
+             <if test="warnTime != null "> and warn_time = #{warnTime}</if>
+             <if test="remark != null  and remark != '' "> and remark = #{remark}</if>
+         </where>
+    </select>
+    
+    <select id="selectWarnById" parameterType="Integer" resultMap="WarnResult">
+        <include refid="selectWarnVo"/>
+        where id = #{id}
+    </select>
+        
+    <insert id="insertWarn" parameterType="Warn">
+        insert into matter_warn
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">id,</if>
+			<if test="matter != null  and matter != ''  ">matter,</if>
+			<if test="beginTime != null  ">begin_time,</if>
+			<if test="endTime != null  ">end_time,</if>
+			<if test="warnTime != null  ">warn_time,</if>
+			<if test="remark != null  and remark != ''  ">remark,</if>
+         </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null  ">#{id},</if>
+			<if test="matter != null  and matter != ''  ">#{matter},</if>
+			<if test="beginTime != null  ">#{beginTime},</if>
+			<if test="endTime != null  ">#{endTime},</if>
+			<if test="warnTime != null  ">#{warnTime},</if>
+			<if test="remark != null  and remark != ''  ">#{remark},</if>
+         </trim>
+    </insert>
+	 
+    <update id="updateWarn" parameterType="Warn">
+        update matter_warn
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="matter != null  and matter != ''  ">matter = #{matter},</if>
+            <if test="beginTime != null  ">begin_time = #{beginTime},</if>
+            <if test="endTime != null  ">end_time = #{endTime},</if>
+            <if test="warnTime != null  ">warn_time = #{warnTime},</if>
+            <if test="remark != null  and remark != ''  ">remark = #{remark},</if>
+        </trim>
+        where id = #{id}
+    </update>
+
+	<delete id="deleteWarnById" parameterType="Integer">
+        delete from matter_warn where id = #{id}
+    </delete>
+	
+    <delete id="deleteWarnByIds" parameterType="String">
+        delete from matter_warn where id in 
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+    
+</mapper>

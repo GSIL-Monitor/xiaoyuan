@@ -1,0 +1,6 @@
+13:15:34.677 [pool-5-thread-1] INFO  sys-user - [run,116] - [127.0.0.1]XX XX[admin][Success][登录成功]
+13:23:45.912 [pool-5-thread-1] INFO  sys-user - [run,116] - [127.0.0.1]XX XX[admin][Error][密码输入错误1次]
+13:23:54.080 [pool-5-thread-2] INFO  sys-user - [run,116] - [127.0.0.1]XX XX[admin][Error][密码输入错误2次]
+13:23:57.839 [pool-5-thread-5] INFO  sys-user - [run,116] - [127.0.0.1]XX XX[admin][Error][密码输入错误3次]
+13:24:21.588 [pool-5-thread-4] INFO  sys-user - [run,116] - [127.0.0.1]XX XX[admin][Error][密码输入错误4次]
+13:24:27.968 [pool-5-thread-1] INFO  sys-user - [run,116] - [127.0.0.1]XX XX[admin][Success][登录成功]
